@@ -1,0 +1,3 @@
+[submodule "3rdparty/example-poco-timer-master"]
+	path = 3rdparty/example-poco-timer-master
+	url = git@github.com:memsharded/example-poco-timer.git
