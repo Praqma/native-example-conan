@@ -71,7 +71,7 @@ jobs:
           command: |
             set -x
             sudo apt-get install --yes cmake
-            cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+            # cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${EXAMPLE_POCO_TIMER_DIR}
             ./bin/timer
       - store_artifacts:
