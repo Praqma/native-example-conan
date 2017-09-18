@@ -70,6 +70,7 @@ jobs:
           name: Run
           command: |
             set -x
+            sudo apt-get install --yes cmake
             cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${EXAMPLE_POCO_TIMER_DIR}
             ./bin/timer
