@@ -60,6 +60,7 @@ jobs:
             conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
             cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
+            ${PWD}/bin/timer
       - run:
           name: Details
           command: |
@@ -72,7 +73,7 @@ jobs:
           name: Run
           command: |
             set -x
-            ./bin/timer
+            ${PWD}/bin/timer
       - store_artifacts:
           path: bin
       - store_artifacts:
@@ -137,6 +138,7 @@ jobs:
             conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
             cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
+            ${PWD}/bin/timer
       - run:
           name: Details
           command: |
@@ -149,7 +151,7 @@ jobs:
           name: Run
           command: |
             set -x
-            ./bin/timer
+            ${PWD}/bin/timer
       - store_artifacts:
           path: bin
       - store_artifacts:
