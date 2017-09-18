@@ -55,7 +55,7 @@ jobs:
           command: |
             set -x
             mkdir build && cd build
-            conan install ../${EXAMPLE_POCO_TIMER_DIR}
+            conan install ..${EXAMPLE_POCO_TIMER_DIR}
       - run:
           name: Details
           command: |
