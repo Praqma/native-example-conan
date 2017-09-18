@@ -47,8 +47,6 @@ jobs:
             python /tmp/get-pip.py --user
             pip install --user pipenv
             pip install --user conan
-            cp bak/timer.cpp ${EXAMPLE_POCO_TIMER_DIR}
-            cp bak/conanfile.txt ${EXAMPLE_POCO_TIMER_DIR}
             conan --version
             ls -al ${EXAMPLE_POCO_TIMER_DIR}
             ls -al ${PWD}
