@@ -73,7 +73,7 @@ jobs:
           name: Run
           command: |
             set -x
-            ${PWD}build/bin/timer
+            ${PWD}/build/bin/timer
       - store_artifacts:
           path: build
   test:
@@ -149,7 +149,7 @@ jobs:
           name: Run
           command: |
             set -x
-            ${PWD}build//bin/timer
+            ${PWD}/build/bin/timer
       - store_artifacts:
           path: build
 workflows:
