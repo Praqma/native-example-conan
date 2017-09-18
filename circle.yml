@@ -69,7 +69,7 @@ jobs:
           command: |
             set -x
             sudo apt-get install --yes cmake
-            # cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+            cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${EXAMPLE_POCO_TIMER_DIR}
             ./bin/timer
       - store_artifacts:
@@ -88,7 +88,7 @@ jobs:
           command: |
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
             echo 'export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
-            echo 'export GSON_DIR=${THIRDPARTY_DIR}/gson-master' >> $BASH_ENV
+            echo 'export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master' >> $BASH_ENV
             echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
       - run:
           name: Update & Upgrade
