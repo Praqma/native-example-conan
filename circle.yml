@@ -28,6 +28,13 @@ jobs:
             set -x
             java -version
       - run:
+          name: Setup Make Prerequisites
+          command: |
+            set -x
+            echo "Setup Make Prerequisites ..."
+            sudo apt-get install --yes build-essential
+            gcc --version
+      - run:
           name: Get Submodule(s)
           command: |
             git submodule init
