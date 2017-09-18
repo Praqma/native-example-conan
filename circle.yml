@@ -40,7 +40,7 @@ jobs:
             git submodule init
             git submodule update
       - run:
-          name: Setup Conan
+          name: Setup
           command: |
             set -x
             curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
@@ -50,7 +50,29 @@ jobs:
             cp bak/timer.cpp ${EXAMPLE_POCO_TIMER_DIR}
             cp bak/conanfile.txt ${EXAMPLE_POCO_TIMER_DIR}
             conan --version
-            conan install ${EXAMPLE_POCO_TIMER_DIR}
+      - run:
+          name: Build
+          command: |
+            set -x
+            mkdir build && cd build
+            conan install ../${EXAMPLE_POCO_TIMER_DIR}
+      - run:
+          name: Details
+          command: |
+            set -x
+            conan search
+            conan search Poco/1.7.8p3@pocoproject/stable
+            conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
+            conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
+      - run:
+          name: Run
+          command: |
+            set -x
+            cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+            cmake --build ${EXAMPLE_POCO_TIMER_DIR}
+            ./bin/timer
+      - store_artifacts:
+          path: build
   test:
     docker:
       - image: circleci/openjdk:jdk
