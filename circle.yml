@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:jdk
+      - image: circleci/golang:latest
     working_directory: ~/sheeeng/omed-conan
     steps:
       - checkout
@@ -28,7 +28,7 @@ jobs:
           name: Check Version
           command: |
             set -x
-            java -version
+            go version
       - run:
           name: Setup Make Prerequisites
           command: |
@@ -78,7 +78,7 @@ jobs:
           path: build
   test:
     docker:
-      - image: circleci/openjdk:jdk
+      - image: circleci/golang:latest
     working_directory: ~/sheeeng/omed-conan
     steps:
       - checkout
@@ -104,7 +104,7 @@ jobs:
           name: Check Version
           command: |
             set -x
-            java -version
+            go version
       - run:
           name: Setup Make Prerequisites
           command: |
