@@ -7,6 +7,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Version
+          command: |
+            set -x
+            go version
+      - run:
+          name: Update & Upgrade
+          command: |
+            set -x
+            sudo apt-get update
+            sudo apt-get upgrade
+      - run:
           name: Interpolating Environment Variables to Set Other Environment Variables
           # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
           # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
@@ -18,17 +29,6 @@ jobs:
             echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
             ls -al ${PWD}
             ls -al ${EXAMPLE_POCO_TIMER_DIR}
-      - run:
-          name: Update & Upgrade
-          command: |
-            set -x
-            sudo apt-get update
-            sudo apt-get upgrade
-      - run:
-          name: Check Version
-          command: |
-            set -x
-            go version
       - run:
           name: Setup Make Prerequisites
           command: |
