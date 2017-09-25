@@ -26,14 +26,17 @@ script:
   - export THIRDPARTY_DIR=${PWD}/3rdparty
   - export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master
   - export PATH=~/.local/bin:$PATH
+  - echo ${PWD}
   - ls -al ${PWD}
   - ls -al ${EXAMPLE_POCO_TIMER_DIR}
   -
-  - mkdir build && cd build
+  - mkdir build
+  - cd build
   - conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
   - cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
   - cmake --build ${PWD}
   - ${PWD}/bin/timer
+  - cd -
   -
   - conan search
   - conan search Poco/1.7.8p3@pocoproject/stable
