@@ -32,7 +32,7 @@ script:
   -
   - mkdir build
   - cd build
-  - conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
+  - conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=4.8 -s compiler.libcxx=libstdc++11
   - cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
   - cmake --build ${PWD}
   - ${PWD}/bin/timer
