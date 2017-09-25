@@ -39,6 +39,6 @@ script:
   - cd -
   -
   - conan search
-  - conan search Poco/1.7.8p3@pocoproject/stable
-  - conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
+  - conan search Poco/1.7.8p3@pocoproject/stable --build missing
+  - conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center --build missing
   - conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
