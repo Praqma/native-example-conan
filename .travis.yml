@@ -14,31 +14,27 @@ script:
   - gcc --version
   - python -version
   - cmake --version
-
-script:
+  -
   - curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
   - python /tmp/get-pip.py --user
   - pip --version
   - pip install --user pipenv
   - pip install --user conan
   - conan --version
-
-script:
+  -
   - export DEBIAN_FRONTEND=noninteractive
   - export THIRDPARTY_DIR=${PWD}/3rdparty
   - export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master
   - export PATH=~/.local/bin:$PATH
   - ls -al ${PWD}
   - ls -al ${EXAMPLE_POCO_TIMER_DIR}
-
-script:
+  -
   - mkdir build && cd build
   - conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
   - cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
   - cmake --build ${PWD}
-  # - ${PWD}/bin/timer
-
-script:
+  - ${PWD}/bin/timer
+  -
   - conan search
   - conan search Poco/1.7.8p3@pocoproject/stable
   - conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
