@@ -15,11 +15,15 @@ script:
   - python -version
   - cmake --version
 
+# script:
+#   - git submodule init
+#   - git submodule update
+
 script:
-  - export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
-  - export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
-  - export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master' >> $BASH_ENV
-  - export PATH=~/.local/bin:$PATH' >> $BASH_ENV
+  - export DEBIAN_FRONTEND=noninteractive
+  - export THIRDPARTY_DIR=${PWD}/3rdparty
+  - export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master
+  - export PATH=~/.local/bin:$PATH
   - ls -al ${PWD}
   - ls -al ${EXAMPLE_POCO_TIMER_DIR}
 
