@@ -15,10 +15,6 @@ script:
   - python -version
   - cmake --version
 
-# script:
-#   - git submodule init
-#   - git submodule update
-
 script:
   - export DEBIAN_FRONTEND=noninteractive
   - export THIRDPARTY_DIR=${PWD}/3rdparty
@@ -40,14 +36,10 @@ script:
   - conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
   - cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
   - cmake --build ${PWD}
-  - ${PWD}/bin/timer
+  # - ${PWD}/bin/timer
 
 script:
   - conan search
   - conan search Poco/1.7.8p3@pocoproject/stable
   - conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
   - conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
-
-script:
-  - set -x
-  - ${PWD}/build/bin/timer
