@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:latest
+      - image: praqma/native-conan:latest
     working_directory: ~/praqma/native-example-conan
     steps:
       - checkout
@@ -18,16 +18,15 @@ jobs:
             set -x
             sudo apt-get update
             sudo apt-get upgrade
-            sudo apt-get install docker
-      - run:
-          name: Build Docker Image
-          command: ${PWD}/dockerize.sh
-      - run:
-          name: Run Container
-          command: ${PWD}/dockerize.sh
-      - run:
-          name: Build Example (Inside Container)
-          command: ${PWD}/dockerize.sh
+      # - run:
+      #     name: Build Docker Image
+      #     command: ${PWD}/dockerize.sh
+      # - run:
+      #     name: Run Container
+      #     command: ${PWD}/dockerize.sh
+      # - run:
+      #     name: Build Example (Inside Container)
+      #     command: ${PWD}/dockerize.sh
       # - run:
       #     name: Interpolating Environment Variables to Set Other Environment Variables
       #     # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
@@ -94,7 +93,7 @@ jobs:
       #     path: build
   test:
     docker:
-      - image: circleci/golang:latest
+      - image: praqma/native-conan:latest
     working_directory: ~/praqma/native-example-conan
     steps:
       - checkout
@@ -116,7 +115,6 @@ jobs:
             set -x
             sudo apt-get update
             sudo apt-get upgrade
-            sudo apt-get install docker
       - run:
           name: Check Version
           command: |
