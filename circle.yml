@@ -25,10 +25,10 @@ jobs:
           command: |
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
             echo 'export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
-            echo 'export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master' >> $BASH_ENV
+            echo 'export FOUR_C_EXAMPLE_DIR=${THIRDPARTY_DIR}/four-c-example-master' >> $BASH_ENV
             echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
             ls -al ${PWD}
-            ls -al ${EXAMPLE_POCO_TIMER_DIR}
+            ls -al ${FOUR_C_EXAMPLE_DIR}
       - run:
           name: Setup Make Prerequisites
           command: |
@@ -56,9 +56,9 @@ jobs:
           name: Build
           command: |
             set -x
-            mkdir build && cd build
-            conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
-            cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+            mkdir .conan && cd .conan
+            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
       - run:
@@ -90,10 +90,10 @@ jobs:
           command: |
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
             echo 'export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
-            echo 'export EXAMPLE_POCO_TIMER_DIR=${THIRDPARTY_DIR}/example-poco-timer-master' >> $BASH_ENV
+            echo 'export FOUR_C_EXAMPLE_DIR=${THIRDPARTY_DIR}/four-c-example-master' >> $BASH_ENV
             echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
             ls -al ${PWD}
-            ls -al ${EXAMPLE_POCO_TIMER_DIR}
+            ls -al ${FOUR_C_EXAMPLE_DIR}
       - run:
           name: Update & Upgrade
           command: |
@@ -132,9 +132,9 @@ jobs:
           name: Build
           command: |
             set -x
-            mkdir build && cd build
-            conan install ${EXAMPLE_POCO_TIMER_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11
-            cmake ${EXAMPLE_POCO_TIMER_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+            mkdir .conan && cd .conan
+            cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
       - run:
