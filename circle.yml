@@ -63,7 +63,7 @@ jobs:
           command: |
             set -x
             mkdir .conan && cd .conan
-            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
@@ -145,7 +145,7 @@ jobs:
           command: |
             set -x
             mkdir .conan && cd .conan
-            cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
