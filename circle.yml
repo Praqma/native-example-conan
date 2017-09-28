@@ -10,6 +10,7 @@ jobs:
           name: Version
           command: |
             set -x
+            cat /etc/lsb-release
             go version
       - run:
           name: Update & Upgrade
@@ -52,9 +53,9 @@ jobs:
             conan --version
             sudo apt-get install --yes cmake
             cmake --version
-            sudo apt-get install --yes clang-3.6
-            sudo ln -s /usr/bin/clang-3.6 /usr/local/bin/clang
-            sudo ln -s /usr/bin/clang++-3.6 /usr/local/bin/clang++
+            sudo apt-get install --yes clang-3.8
+            sudo ln -s /usr/bin/clang-3.8 /usr/local/bin/clang
+            sudo ln -s /usr/bin/clang++-3.8 /usr/local/bin/clang++
             clang --version
             clang++ --version
       - run:
@@ -109,6 +110,7 @@ jobs:
           name: Check Version
           command: |
             set -x
+            cat /etc/lsb-release
             go version
       - run:
           name: Setup Make Prerequisites
