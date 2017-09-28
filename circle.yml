@@ -18,70 +18,71 @@ jobs:
             set -x
             sudo apt-get update
             sudo apt-get upgrade
-      - run:
-          name: Interpolating Environment Variables to Set Other Environment Variables
-          # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
-          # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
-          # https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables
-          command: |
-            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
-            echo 'export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
-            echo 'export FOUR_C_EXAMPLE_DIR=${THIRDPARTY_DIR}/four-c-example-master' >> $BASH_ENV
-            echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
-            ls -al ${PWD}
-            ls -al ${FOUR_C_EXAMPLE_DIR}
-      - run:
-          name: Setup Make Prerequisites
-          command: |
-            set -x
-            echo "Setup Make Prerequisites ..."
-            sudo apt-get install --yes build-essential
-            gcc --version
-      - run:
-          name: Get Submodule(s)
-          command: |
-            git submodule init
-            git submodule update
-      - run:
-          name: Setup
-          command: |
-            set -x
-            curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-            python /tmp/get-pip.py --user
-            pip install --user pipenv
-            pip install --user conan
-            conan --version
-            sudo apt-get install --yes cmake
-            cmake --version
-            sudo apt-get install --yes clang-3.8
-            sudo ln -s /usr/bin/clang-3.8 /usr/local/bin/clang
-            sudo ln -s /usr/bin/clang++-3.8 /usr/local/bin/clang++
-            clang --version
-            clang++ --version
-      - run:
-          name: Build
-          command: |
-            set -x
-            mkdir ${FOUR_C_EXAMPLE_DIR}/.conan && cd ${FOUR_C_EXAMPLE_DIR}/.conan
-            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
-            cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-            cmake --build ${PWD}
-            ${PWD}/bin/timer
-      - run:
-          name: Details
-          command: |
-            set -x
-            conan search
-            conan search Poco/1.7.8p3@pocoproject/stable
-            conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
-            conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
-      - run:
-          name: Run
-          command: |
-            set -x
-            ${PWD}/build/bin/timer
-      - store_artifacts:
-          path: build
+            sudo apt-get install docker
+      # - run:
+      #     name: Interpolating Environment Variables to Set Other Environment Variables
+      #     # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
+      #     # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
+      #     # https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables
+      #     command: |
+      #       echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+      #       echo 'export THIRDPARTY_DIR=${PWD}/3rdparty' >> $BASH_ENV
+      #       echo 'export FOUR_C_EXAMPLE_DIR=${THIRDPARTY_DIR}/four-c-example-master' >> $BASH_ENV
+      #       echo 'export PATH=~/.local/bin:$PATH' >> $BASH_ENV
+      #       ls -al ${PWD}
+      #       ls -al ${FOUR_C_EXAMPLE_DIR}
+      # - run:
+      #     name: Setup Make Prerequisites
+      #     command: |
+      #       set -x
+      #       echo "Setup Make Prerequisites ..."
+      #       sudo apt-get install --yes build-essential
+      #       gcc --version
+      # - run:
+      #     name: Get Submodule(s)
+      #     command: |
+      #       git submodule init
+      #       git submodule update
+      # - run:
+      #     name: Setup
+      #     command: |
+      #       set -x
+      #       curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+      #       python /tmp/get-pip.py --user
+      #       pip install --user pipenv
+      #       pip install --user conan
+      #       conan --version
+      #       sudo apt-get install --yes cmake
+      #       cmake --version
+      #       sudo apt-get install --yes clang-3.8
+      #       sudo ln -s /usr/bin/clang-3.8 /usr/local/bin/clang
+      #       sudo ln -s /usr/bin/clang++-3.8 /usr/local/bin/clang++
+      #       clang --version
+      #       clang++ --version
+      # - run:
+      #     name: Build
+      #     command: |
+      #       set -x
+      #       mkdir ${FOUR_C_EXAMPLE_DIR}/.conan && cd ${FOUR_C_EXAMPLE_DIR}/.conan
+      #       conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
+      #       cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+      #       cmake --build ${PWD}
+      #       ${PWD}/bin/timer
+      # - run:
+      #     name: Details
+      #     command: |
+      #       set -x
+      #       conan search
+      #       conan search Poco/1.7.8p3@pocoproject/stable
+      #       conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
+      #       conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
+      # - run:
+      #     name: Run
+      #     command: |
+      #       set -x
+      #       ${PWD}/build/bin/timer
+      # - store_artifacts:
+      #     path: build
   test:
     docker:
       - image: circleci/golang:latest
@@ -106,64 +107,65 @@ jobs:
             set -x
             sudo apt-get update
             sudo apt-get upgrade
+            sudo apt-get install docker
       - run:
           name: Check Version
           command: |
             set -x
             cat /etc/*release
             go version
-      - run:
-          name: Setup Make Prerequisites
-          command: |
-            set -x
-            echo "Setup Make Prerequisites ..."
-            sudo apt-get install --yes build-essential
-            gcc --version
-      - run:
-          name: Get Submodule(s)
-          command: |
-            git submodule init
-            git submodule update
-      - run:
-          name: Setup
-          command: |
-            set -x
-            curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-            python /tmp/get-pip.py --user
-            pip install --user pipenv
-            pip install --user conan
-            conan --version
-            sudo apt-get install --yes cmake
-            cmake --version
-            sudo apt-get install --yes clang-3.6
-            sudo ln -s /usr/bin/clang-3.6 /usr/local/bin/clang
-            sudo ln -s /usr/bin/clang++-3.6 /usr/local/bin/clang++
-            clang --version
-            clang++ --version
-      - run:
-          name: Build
-          command: |
-            set -x
-            mkdir ${FOUR_C_EXAMPLE_DIR}/.conan && cd ${FOUR_C_EXAMPLE_DIR}/.conan
-            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
-            cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-            cmake --build ${PWD}
-            ${PWD}/bin/timer
-      - run:
-          name: Details
-          command: |
-            set -x
-            conan search
-            conan search Poco/1.7.8p3@pocoproject/stable
-            conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
-            conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
-      - run:
-          name: Run
-          command: |
-            set -x
-            ${PWD}/build/bin/timer
-      - store_artifacts:
-          path: build
+      # - run:
+      #     name: Setup Make Prerequisites
+      #     command: |
+      #       set -x
+      #       echo "Setup Make Prerequisites ..."
+      #       sudo apt-get install --yes build-essential
+      #       gcc --version
+      # - run:
+      #     name: Get Submodule(s)
+      #     command: |
+      #       git submodule init
+      #       git submodule update
+      # - run:
+      #     name: Setup
+      #     command: |
+      #       set -x
+      #       curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+      #       python /tmp/get-pip.py --user
+      #       pip install --user pipenv
+      #       pip install --user conan
+      #       conan --version
+      #       sudo apt-get install --yes cmake
+      #       cmake --version
+      #       sudo apt-get install --yes clang-3.6
+      #       sudo ln -s /usr/bin/clang-3.6 /usr/local/bin/clang
+      #       sudo ln -s /usr/bin/clang++-3.6 /usr/local/bin/clang++
+      #       clang --version
+      #       clang++ --version
+      # - run:
+      #     name: Build
+      #     command: |
+      #       set -x
+      #       mkdir ${FOUR_C_EXAMPLE_DIR}/.conan && cd ${FOUR_C_EXAMPLE_DIR}/.conan
+      #       conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
+      #       cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+      #       cmake --build ${PWD}
+      #       ${PWD}/bin/timer
+      # - run:
+      #     name: Details
+      #     command: |
+      #       set -x
+      #       conan search
+      #       conan search Poco/1.7.8p3@pocoproject/stable
+      #       conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
+      #       conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
+      # - run:
+      #     name: Run
+      #     command: |
+      #       set -x
+      #       ${PWD}/build/bin/timer
+      # - store_artifacts:
+      #     path: build
 workflows:
   version: 2
   build_and_test:

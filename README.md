@@ -22,3 +22,9 @@ See [native](https://github.com/Praqma/native) repository for more examples.
 [![GitHub Tags](https://img.shields.io/github/tag/praqma/native-example-conan.svg)](https://img.shields.io/github/tag/praqma/native-example-conan.svg)
 [![GitHub Releases](https://img.shields.io/github/release/praqma/native-example-conan.svg)](https://img.shields.io/github/release/praqma/native-example-conan.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/praqma/native-example-conan.svg)](https://img.shields.io/github/issues/praqma/native-example-conan.svg) -->
+
+## Steps
+
+* Build image: `./dockerize.sh`
+* Run container: `./containerize.sh`
+* Build example (inside container): `./build.sh`

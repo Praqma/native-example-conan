@@ -20,6 +20,8 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
+git submodule update --init --force
+
 mkdir -p ${BUILD_DIR} \
   && cd ${BUILD_DIR}
 
