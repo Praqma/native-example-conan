@@ -62,7 +62,7 @@ jobs:
           name: Build
           command: |
             set -x
-            mkdir .conan && cd .conan
+            mkdir build && cd build
             conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
@@ -144,7 +144,7 @@ jobs:
           name: Build
           command: |
             set -x
-            mkdir .conan && cd .conan
+            mkdir build && cd build
             cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
