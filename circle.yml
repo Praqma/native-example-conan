@@ -10,7 +10,7 @@ jobs:
           name: Version
           command: |
             set -x
-            cat /etc/lsb-release
+            cat /etc/*release
             go version
       - run:
           name: Update & Upgrade
@@ -110,7 +110,7 @@ jobs:
           name: Check Version
           command: |
             set -x
-            cat /etc/lsb-release
+            cat /etc/*release
             go version
       - run:
           name: Setup Make Prerequisites
