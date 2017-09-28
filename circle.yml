@@ -52,12 +52,17 @@ jobs:
             conan --version
             sudo apt-get install --yes cmake
             cmake --version
+            sudo apt-get install --yes clang-3.6
+            sudo ln -s /usr/bin/clang-3.6 /usr/local/bin/clang
+            sudo ln -s /usr/bin/clang++-3.6 /usr/local/bin/clang++
+            clang --version
+            clang++ --version
       - run:
           name: Build
           command: |
             set -x
             mkdir .conan && cd .conan
-            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
@@ -128,12 +133,17 @@ jobs:
             conan --version
             sudo apt-get install --yes cmake
             cmake --version
+            sudo apt-get install --yes clang-3.6
+            sudo ln -s /usr/bin/clang-3.6 /usr/local/bin/clang
+            sudo ln -s /usr/bin/clang++-3.6 /usr/local/bin/clang++
+            clang --version
+            clang++ --version
       - run:
           name: Build
           command: |
             set -x
             mkdir .conan && cd .conan
-            cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=gcc -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
+            cconan install ${FOUR_C_EXAMPLE_DIR} -s compiler=clang -s compiler.version=6.3 -s compiler.libcxx=libstdc++11 --build=missing
             cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
             cmake --build ${PWD}
             ${PWD}/bin/timer
