@@ -19,6 +19,15 @@ jobs:
             sudo apt-get update
             sudo apt-get upgrade
             sudo apt-get install docker
+      - run:
+          name: Build Docker Image
+          command: ${PWD}/dockerize.sh
+      - run:
+          name: Run Container
+          command: ${PWD}/dockerize.sh
+      - run:
+          name: Build Example (Inside Container)
+          command: ${PWD}/dockerize.sh
       # - run:
       #     name: Interpolating Environment Variables to Set Other Environment Variables
       #     # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
