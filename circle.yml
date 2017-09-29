@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: praqma/native-conan:latest
-    working_directory: ~/praqma/native-example-conan
+    working_directory: /workspace
     steps:
       - checkout
       - run:
@@ -28,7 +28,7 @@ jobs:
   test:
     docker:
       - image: praqma/native-conan:latest
-    working_directory: ~/praqma/native-example-conan
+    working_directory: /workspace
     steps:
       - checkout
       - run:
