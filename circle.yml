@@ -12,11 +12,8 @@ jobs:
             set -x
             cat /etc/*release
       - run:
-          name: Build Docker Image
-          command: ${PWD}/dockerize.sh
-      - run:
           name: Run Container
-          command: ${PWD}/containerize-ci-build.sh
+          command: ${PWD}/build-ci.sh
   test:
     docker:
       - image: praqma/native-conan:latest
