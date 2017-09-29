@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build --tag praqma/native-conan:0.0.1 --file ${PWD}/Dockerfile ${PWD}
+docker build --tag praqma/native-conan:latest --file ${PWD}/Dockerfile ${PWD}
