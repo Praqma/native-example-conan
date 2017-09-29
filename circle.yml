@@ -31,6 +31,7 @@ jobs:
     working_directory: ~/praqma/native-example-conan
     steps:
       - checkout
+      - run:
           name: Interpolating Environment Variables to Set Other Environment Variables
           # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
           # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
