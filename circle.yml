@@ -13,7 +13,7 @@ jobs:
             cat /etc/*release
       - run:
           name: Build
-          command: bash ${PWD}/build-ci.sh
+          command: bash ${PWD}/build.sh
   test:
     docker:
       - image: praqma/native-conan:latest
@@ -27,7 +27,7 @@ jobs:
             cat /etc/*release
       - run:
           name: Build
-          command: bash ${PWD}/build-ci.sh
+          command: bash ${PWD}/build.sh
 workflows:
   version: 2
   build_and_test:
