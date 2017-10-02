@@ -22,7 +22,6 @@ script:
   - clang --version
   - gcc --version
   - java --version
-  - dot -V
   - ls -al ${PWD}
   - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-conan:latest ./build.sh
   - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-conan:latest ./test.sh
