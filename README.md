@@ -14,15 +14,6 @@ Building with [Conan](https://conan.io/).
 
 See [native](https://github.com/Praqma/native) repository for more examples.
 
-<!-- GitHub
-
-[![GitHub Stars](https://img.shields.io/github/stars/praqma/native-example-conan.svg?style=social&label=Star)](https://img.shields.io/github/stars/praqma/native-example-conan.svg?style=social&label=Star)
-[![GitHub Forks](https://img.shields.io/github/forks/praqma/native-example-conan.svg?style=social&label=Fork)](https://img.shields.io/github/forks/praqma/native-example-conan.svg?style=social&label=Fork)
-[![GitHub Watchers](https://img.shields.io/github/watchers/praqma/native-example-conan.svg?style=social&label=Watch)](https://img.shields.io/github/watchers/praqma/native-example-conan.svg?style=social&label=Watch)
-[![GitHub Tags](https://img.shields.io/github/tag/praqma/native-example-conan.svg)](https://img.shields.io/github/tag/praqma/native-example-conan.svg)
-[![GitHub Releases](https://img.shields.io/github/release/praqma/native-example-conan.svg)](https://img.shields.io/github/release/praqma/native-example-conan.svg)
-[![GitHub Issues](https://img.shields.io/github/issues/praqma/native-example-conan.svg)](https://img.shields.io/github/issues/praqma/native-example-conan.svg) -->
-
 ## Steps
 
 * Build image: `./dockerize.sh`
