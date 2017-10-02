@@ -1,3 +1,6 @@
 [submodule "3rdparty/example-poco-timer-master"]
 	path = 3rdparty/example-poco-timer-master
 	url = https://github.com/memsharded/example-poco-timer.git
+[submodule "3rdparty/conan-gtest-example-master"]
+	path = 3rdparty/conan-gtest-example-master
+	url = https://github.com/lasote/conan-gtest-example

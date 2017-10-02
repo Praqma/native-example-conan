@@ -11,7 +11,7 @@ set -x
 export DEBIAN_FRONTEND=noninteractive
 export WORKSPACE_DIR=/workspace
 export THIRDPARTY_DIR=${WORKSPACE_DIR}/3rdparty
-export EXAMPLE_DIR=${THIRDPARTY_DIR}/example-poco-timer-master
+export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master/test_package
 export BUILD_DIR=${EXAMPLE_DIR}/build
 
 if [ "$PWD" != "$WORKSPACE_DIR" ]; then
@@ -27,18 +27,19 @@ mkdir -p ${BUILD_DIR} \
 
 cd ${BUILD_DIR} \
   && conan install .. \
-  -s compiler=gcc \
-  -s compiler.version=6.3 \
-  -s compiler.libcxx=libstdc++11 \
-  --build=missing
+  --settings compiler=gcc \
+  --settings compiler.version=6.3 \
+  --settings compiler.libcxx=libstdc++11 \
+  --build=missing \
+  && find ${PWD}
 
 cd ${BUILD_DIR} \
   && cmake .. \
   -G "Unix Makefiles" \
-  -DCMAKE_BUILD_TYPE=Release\
-  && cmake --build .
+  -DCMAKE_BUILD_TYPE=Release \
+  && cmake --build . \
+  && cmake --build . --target test \
+  && find ${PWD}
 
-${BUILD_DIR}/bin/timer
 
-echo "This example need some tests."
-exit 42
+
