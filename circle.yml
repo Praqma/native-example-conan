@@ -45,7 +45,7 @@ jobs:
             set -x
             cat /etc/*release
       - run:
-          name: Build
+          name: Test
           command: |
             set -x
             cd ${WORKSPACE_DIR}
