@@ -15,7 +15,7 @@ export EXAMPLE_DIR=${THIRDPARTY_DIR}/example-poco-timer-master
 export BUILD_DIR=${EXAMPLE_DIR}/build
 
 if [ "$PWD" != "$WORKSPACE_DIR" ]; then
-  echo "Build helper script to be run inside a container."
+  echo "Test helper script to be run inside a container."
   echo "Go to $WORKSPACE_DIR directory before running this script."
   exit 1
 fi
@@ -39,3 +39,6 @@ cd ${BUILD_DIR} \
   && cmake --build .
 
 ${BUILD_DIR}/bin/timer
+
+echo "This example need some tests."
+exit 42

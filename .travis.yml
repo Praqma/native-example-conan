@@ -1,44 +1,28 @@
+sudo: required
+
+services:
+  - docker
+
 language: cpp
 
 compiler:
   - clang
   - gcc
 
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: change # default: always
+
 before_install:
-  - sudo apt-get update --quiet
-  - sudo apt-get install --yes build-essential
-  - sudo apt-get install --yes python cmake
+  - docker pull praqma/native-conan:latest
 
 script:
+  - cat /etc/*-release
   - clang --version
   - gcc --version
-  - python --version
-  - cmake --version
-  -
-  - curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-  - python /tmp/get-pip.py --user
-  - pip --version
-  - pip install --user pipenv
-  - pip install --user conan
-  - conan --version
-  -
-  - export DEBIAN_FRONTEND=noninteractive
-  - export THIRDPARTY_DIR=${PWD}/3rdparty
-  - export FOUR_C_EXAMPLE_DIR=${THIRDPARTY_DIR}/four-c-example-master
-  - export PATH=~/.local/bin:$PATH
-  - echo ${PWD}
+  - java --version
+  - dot -V
   - ls -al ${PWD}
-  - ls -al ${FOUR_C_EXAMPLE_DIR}
-  -
-  - mkdir build
-  - cd build
-  - conan install ${FOUR_C_EXAMPLE_DIR} -s compiler=gcc -s compiler.version=4.8 -s compiler.libcxx=libstdc++11
-  - cmake ${FOUR_C_EXAMPLE_DIR} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-  - cmake --build ${PWD}
-  - ${PWD}/bin/timer
-  - cd -
-  -
-  - conan search
-  - conan search Poco/1.7.8p3@pocoproject/stable
-  - conan search zlib/1.2.11@conan/stable --table=build/onan_search_table.html -r=conan-center
-  - conan info 3rdparty/example-poco-timer-master --graph=build/conan_info_graph.html
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-conan:latest ./build.sh
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-conan:latest ./test.sh
