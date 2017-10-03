@@ -16,8 +16,8 @@ See [native](https://github.com/Praqma/native) repository for more examples.
 
 ## Steps
 
-* Build image: `./dockerize.sh`
-* Run container: `./containerize.sh`
+* Build image: `./docker-build.sh`
+* Run container: `./docker-run.sh`
 * Build example (inside container): `./build.sh`
 * Test example (inside container): `./test.sh`
 
@@ -26,3 +26,7 @@ See [native](https://github.com/Praqma/native) repository for more examples.
 * `Test your project with Google Test` example project from Conan documentation did not work.
 
 Following the [documentation](http://conanio.readthedocs.io/en/latest/howtos/use_gtest.html) on `Test your project with Google Test` did not work. [Issue](https://github.com/lasote/conan-gtest-example/issues/5) on the problem was reported.
+
+* The `conan test_package` command deprecated.
+
+Following the [documentation](https://conanio.readthedocs.io/en/latest/reference/commands/test_package.html), The `test_package` command was the preferred way to create packages. Now this has been superseded by the `conan create` command. `test_package` will keep backwards compatibility for a while, but the recommended usage from now would be to use for pure testing, with `conan test_package user/channel --test-only`.
