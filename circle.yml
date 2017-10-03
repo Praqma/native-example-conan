@@ -27,10 +27,10 @@ jobs:
             cd ${WORKSPACE_DIR}
             bash ${PWD}/build.sh
       - store_artifacts:
-          path: ${WORKSPACE_DIR}/build/lib
+          path: /workspace/3rdparty/conan-gtest-example-master/build/lib
           destination: liby
       - store_artifacts:
-          path: ${WORKSPACE_DIR}/build/graph
+          path: /workspace/3rdparty/conan-gtest-example-master/build/graph
           destination: graphy
   test:
     docker:
