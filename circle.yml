@@ -26,6 +26,12 @@ jobs:
             set -x
             cd ${WORKSPACE_DIR}
             bash ${PWD}/build.sh
+      - store_artifacts:
+          path: ${WORKSPACE_DIR}/build/lib
+          destination: liby
+      - store_artifacts:
+          path: ${WORKSPACE_DIR}/build/graph
+          destination: graphy
   test:
     docker:
       - image: praqma/native-conan:latest
