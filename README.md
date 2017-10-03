@@ -20,3 +20,9 @@ See [native](https://github.com/Praqma/native) repository for more examples.
 * Run container: `./containerize.sh`
 * Build example (inside container): `./build.sh`
 * Test example (inside container): `./test.sh`
+
+## Lesson Learned
+
+* `Test your project with Google Test` example project from Conan documentation did not work.
+
+Following the [documentation](http://conanio.readthedocs.io/en/latest/howtos/use_gtest.html) on `Test your project with Google Test` did not work. [Issue](https://github.com/lasote/conan-gtest-example/issues/5) on the problem was reported.
