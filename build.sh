@@ -20,8 +20,6 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-git submodule update --init --force
-
 mkdir -p ${BUILD_DIR} \
   && cd ${BUILD_DIR}
 
@@ -32,9 +30,13 @@ cd ${BUILD_DIR} \
   --settings compiler.libcxx=libstdc++11 \
   --build=missing
 
+# cd ${BUILD_DIR} \
+#   && cmake .. \
+#   -G "Unix Makefiles" \
+#   -DCMAKE_BUILD_TYPE=Release \
+#   && cmake --build . \
+#   && find ${PWD}/lib
+
 cd ${BUILD_DIR} \
-  && cmake .. \
-  -G "Unix Makefiles" \
-  -DCMAKE_BUILD_TYPE=Release \
-  && cmake --build . \
+  && conan build .. \
   && find ${PWD}/lib
