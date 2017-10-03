@@ -11,8 +11,7 @@ set -x
 export DEBIAN_FRONTEND=noninteractive
 export WORKSPACE_DIR=/workspace
 export THIRDPARTY_DIR=${WORKSPACE_DIR}/3rdparty
-export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master/test_package
-export BUILD_DIR=${EXAMPLE_DIR}/build
+export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master
 
 if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   echo "Test helper script to be run inside a container."
@@ -20,28 +19,5 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-mkdir -p ${BUILD_DIR} \
-  && cd ${BUILD_DIR}
-
-cd ${BUILD_DIR} \
-  && conan install .. \
-  --settings compiler=gcc \
-  --settings compiler.version=6.3 \
-  --settings compiler.libcxx=libstdc++11 \
-  --build=missing \
-  && find ${PWD}
-
-cd ${BUILD_DIR} \
-  && conan build .. \
-  && find ${PWD}/lib
-
-cd ${BUILD_DIR} \
-  && cmake .. \
-  -G "Unix Makefiles" \
-  -DCMAKE_BUILD_TYPE=Release \
-  && cmake --build . \
-  && cmake --build . --target test \
-  && find ${PWD}
-
-
-
+cd ${EXAMPLE_DIR} \
+  && conan test_package whatevername/whateverchannel
