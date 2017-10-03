@@ -13,6 +13,7 @@ export WORKSPACE_DIR=/workspace
 export THIRDPARTY_DIR=${WORKSPACE_DIR}/3rdparty
 export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master
 export BUILD_DIR=${EXAMPLE_DIR}/build
+export GRAPH_DIR=${BUILD_DIR}/graph
 
 if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   echo "Build helper script to be run inside a container."
@@ -20,7 +21,7 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-mkdir -p ${BUILD_DIR} \
+mkdir -p ${BUILD_DIR} ${GRAPH_DIR} \
   && cd ${BUILD_DIR}
 
 cd ${BUILD_DIR} \
@@ -39,4 +40,6 @@ cd ${BUILD_DIR} \
 
 cd ${BUILD_DIR} \
   && conan build .. \
-  && find ${PWD}/lib
+  && conan info .. --graph=${GRAPH_DIR}/dependencies.html \
+  && conan info .. --graph=${GRAPH_DIR}/dependencies.dot \
+  && find ${BUILD_DIR}/lib
