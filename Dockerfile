@@ -5,7 +5,8 @@ RUN apt-get update \
   curl \
   build-essential \
   clang-3.8 \
-  cmake
+  cmake \
+  git
 
 RUN curl --silent --location \
   https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py \
