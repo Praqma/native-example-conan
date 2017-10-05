@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-
-# Programming C++ With The 4 Cs: Clang, Cmake, Clion And Conan
-# http://blog.conan.io/2016/05/10/Programming-C++-with-the-4-Cs-Clang,-CMake,-CLion-and-Conan.html
-
-# A Timer using POCO Libraries
-# https://conanio.readthedocs.io/en/latest/getting_started.html#a-timer-using-poco-libraries
-
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
