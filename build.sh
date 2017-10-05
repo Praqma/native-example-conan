@@ -21,8 +21,13 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-mkdir -p ${BUILD_DIR} ${GRAPH_DIR} \
-  && cd ${BUILD_DIR}
+mkdir -p ${BUILD_DIR} ${GRAPH_DIR}
+
+# cd ${BUILD_DIR} \
+#   && conan create user/channel --cwd=.. --build \
+#   && conan info --cwd=.. --graph=${GRAPH_DIR}/dependencies.html \
+#   && conan info --cwd=.. --graph=${GRAPH_DIR}/dependencies.dot \
+#   && find ${BUILD_DIR}
 
 cd ${BUILD_DIR} \
   && conan install .. \
@@ -36,10 +41,11 @@ cd ${BUILD_DIR} \
 #   -G "Unix Makefiles" \
 #   -DCMAKE_BUILD_TYPE=Release \
 #   && cmake --build . \
-#   && find ${PWD}/lib
+#   && find ${BUILD_DIR}/lib
 
 cd ${BUILD_DIR} \
   && conan build .. \
   && conan info .. --graph=${GRAPH_DIR}/dependencies.html \
   && conan info .. --graph=${GRAPH_DIR}/dependencies.dot \
-  && find ${BUILD_DIR}/lib
+  && find ${BUILD_DIR}/lib \
+  && find ${GRAPH_DIR}
