@@ -9,6 +9,8 @@
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+
 export WORKSPACE_DIR=/workspace
 export THIRDPARTY_DIR=${WORKSPACE_DIR}/3rdparty
 export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master
@@ -19,5 +21,12 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-cd ${EXAMPLE_DIR} \
-  && conan test_package whatevername/whateverchannel
+cd ${EXAMPLE_DIR} || exit $?
+sed --in-place=.bak 's/1.0.2l/1.0.2o/g' conanfile.py || exit $?
+sed --in-place=.bak 's/1.7.0\@lasote/1.8.1\@bincrafters/g' test_package/conanfile.py || exit $?
+
+CONAN_USER="whateveruser"
+CONAN_CHANNEL="whateverchannel"
+conan create . "${CONAN_USER}"/"${CONAN_CHANNEL}" --build missing || exit $?
+conan test test_package conan-gtest-example/0.1.0@"${CONAN_USER}"/"${CONAN_CHANNEL}" || exit $?
+
