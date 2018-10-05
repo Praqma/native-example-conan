@@ -2,6 +2,8 @@
 set -x
 
 export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+
 export WORKSPACE_DIR=/workspace
 export THIRDPARTY_DIR=${WORKSPACE_DIR}/3rdparty
 export EXAMPLE_DIR=${THIRDPARTY_DIR}/conan-gtest-example-master

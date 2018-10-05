@@ -21,8 +21,12 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-cd ${EXAMPLE_DIR}
-sed --in-place=.bak 's/1.0.2l/1.0.2o/g' conanfile.py
-sed --in-place=.bak 's/1.7.0\@lasote/1.8.1\@bincrafters/g' test_package/conanfile.py
-conan test test_package . whatevername/whateverchannel
+cd ${EXAMPLE_DIR} || exit $?
+sed --in-place=.bak 's/1.0.2l/1.0.2o/g' conanfile.py || exit $?
+sed --in-place=.bak 's/1.7.0\@lasote/1.8.1\@bincrafters/g' test_package/conanfile.py || exit $?
+
+CONAN_USER="whateveruser"
+CONAN_CHANNEL="whateverchannel"
+conan create . "${CONAN_USER}"/"${CONAN_CHANNEL}" --build missing || exit $?
+conan test test_package "${PWD}" "${CONAN_USER}"/"${CONAN_CHANNEL}" || exit $?
 
