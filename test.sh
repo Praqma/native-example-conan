@@ -28,5 +28,5 @@ sed --in-place=.bak 's/1.7.0\@lasote/1.8.1\@bincrafters/g' test_package/conanfil
 CONAN_USER="whateveruser"
 CONAN_CHANNEL="whateverchannel"
 conan create . "${CONAN_USER}"/"${CONAN_CHANNEL}" --build missing || exit $?
-conan test test_package "${PWD}" "${CONAN_USER}"/"${CONAN_CHANNEL}" || exit $?
+conan test test_package conan-gtest-example/0.1.0@"${CONAN_USER}"/"${CONAN_CHANNEL}" || exit $?
 
