@@ -24,5 +24,5 @@ fi
 cd ${EXAMPLE_DIR}
 sed --in-place=.bak 's/1.0.2l/1.0.2o/g' conanfile.py
 sed --in-place=.bak 's/1.7.0\@lasote/1.8.1\@bincrafters/g' test_package/conanfile.py
-conan test_package . whatevername/whateverchannel
+conan test test_package . whatevername/whateverchannel
 
